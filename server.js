@@ -8,7 +8,7 @@ const weatherData = require('./data/weather.json')
 
 
 
-const PORT = process.env.PORT || 3001 ;
+const PORT = process.env.PORT;
 server.use(cors());
 
 server.get('/weather', (request,response)=>{
