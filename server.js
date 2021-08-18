@@ -73,7 +73,7 @@ try{
     //    console.log('the city object is : ',city);
        
     
-       let cityMovieData=new movieDataConst (city.title, city.overview, city.vote_average,city.vote_count,city.poster_path,city.popularity,city.release_date);
+       let cityMovieData=new movieDataConst (city.title, city.overview, city.vote_average,city.vote_count,`https://image.tmdb.org/t/p/w500${city.poster_path}`,city.popularity,city.release_date);
        
        arr.push(cityMovieData);   }
 )
