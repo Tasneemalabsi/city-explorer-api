@@ -1,10 +1,20 @@
 const axios = require('axios');
 module.exports = handleMoviesData;
+let inMemory={};
 
 async function handleMoviesData(req,res){
     let query= req.query.query;
     let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIES_KEY}&query=${query}`
     let arr = [];
+
+
+   if (inMemory[query] !== undefined) {
+        console.log(' cache hit , data in cache memory');
+        res.send(inMemory[query]);
+    }
+
+    else {
+        console.log(' cache miss , send req to unsplash API');
     try{
         let movieData= await axios.get(url);
         
@@ -16,7 +26,9 @@ async function handleMoviesData(req,res){
            
            arr.push(cityMovieData);   }
     )
-    res.send(arr)
+          inMemory[query] = arr;
+         res.send(arr);
+         console.log(arr);
         }
         
     catch(error) {
@@ -26,6 +38,7 @@ async function handleMoviesData(req,res){
     
     
     }
+}
     
     
     class movieDataConst {
